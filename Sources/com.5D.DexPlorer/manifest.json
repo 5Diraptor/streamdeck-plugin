@@ -2,30 +2,29 @@
   "Actions": [
     {
       "Icon": "action/images/actionimage", 
-      "Name": "Example Action", 
+      "Name": "DexPlorer", 
       "States": [
         {
-          "Image": "action/images/action"
+          "Image": "action/images/action",
+		  "TitleAlignment": "middle", 
+          "FontSize": "16"
         }
       ], 
-      "Tooltip": "This is an example tooltip", 
+      "SupportedInMultiActions": false,
+	  "Tooltip": "This is an example tooltip", 
       "UUID": "com.elgato.template.action"
     }
   ], 
   "SDKVersion": 2,
-  "Author": "Elgato", 
+  "Author": "5Diraptor", 
   "CodePath": "index.html", 
   "PropertyInspectorPath": "propertyinspector/index.html", 
-  "Description": "Example description", 
-  "Name": "Stream Deck Template", 
+  "Description": "Folder and file explorer for streamdeck", 
+  "Name": "DexPlorer", 
   "Icon": "action/images/action", 
   "URL": "https://www.elgato.com/en/gaming/stream-deck", 
-  "Version": "1.0.1",
+  "Version": "1.1.1",
   "OS": [
-    {
-        "Platform": "mac", 
-        "MinimumVersion" : "10.11"
-    },
     {
         "Platform": "windows", 
         "MinimumVersion" : "10"
@@ -34,5 +33,13 @@
   "Software": 
     {
         "MinimumVersion" : "4.1"
+  }
+  "ApplicationsToMonitor": {
+    "mac": [
+      "com.apple.finder"
+    ],
+    "windows": [
+      "explorer.exe"
+    ]
   }
 }
