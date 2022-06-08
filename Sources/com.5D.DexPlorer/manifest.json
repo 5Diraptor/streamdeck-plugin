@@ -1,45 +1,110 @@
 {
-  "Actions": [
-    {
-      "Icon": "action/images/actionimage", 
-      "Name": "DexPlorer", 
-      "States": [
+	"Actions": [
+		{
+			"Name": "DxP_tile", 
+			"States": [
+				{
+					"Image": "action/images/action",
+					"TitleAlignment": "middle", 
+					"FontSize": "16"
+				}
+			], 
+			"SupportedInMultiActions": false,
+			//"VisibleInActionsList": false,
+			"Tooltip": "This is an example tooltip", 
+			"UUID": "com.elgato.dexplorer.tile"
+		},
+		{
+			"Name": "DxP_up", 
+			"States": [
+				{
+					"Image": "action/images/action",
+					"TitleAlignment": "middle", 
+					"FontSize": "16"
+				}
+			], 
+			"SupportedInMultiActions": false,
+			//"VisibleInActionsList": false,
+			"Tooltip": "This is an example tooltip", 
+			"UUID": "com.elgato.dexplorer.up"
+		},
+		{
+			"Name": "DxP_prev", 
+			"States": [
+				{
+					"Image": "action/images/action",
+					"TitleAlignment": "middle", 
+					"FontSize": "16"
+				}
+			], 
+			"SupportedInMultiActions": false,
+			//"VisibleInActionsList": false,
+			"Tooltip": "This is an example tooltip", 
+			"UUID": "com.elgato.dexplorer.prev"
+		},
+		{
+			"Name": "DxP_next", 
+			"States": [
+				{
+					"Image": "action/images/action",
+					"TitleAlignment": "middle", 
+					"FontSize": "16"
+				}
+			], 
+			"SupportedInMultiActions": false,
+			//"VisibleInActionsList": false,
+			"Tooltip": "This is an example tooltip", 
+			"UUID": "com.elgato.dexplorer.next"
+		}
+	],
+	"Profiles": [
         {
-          "Image": "action/images/action",
-		  "TitleAlignment": "middle", 
-          "FontSize": "16"
+            "Name": "ReactionDeck5d",
+            "ReadOnly": true,
+            "DeviceType": 0
+        },
+        {
+            "Name": "ReactionDeckMini5d",
+            "ReadOnly": true,
+            "DeviceType": 1
+        },
+        {
+            "Name": "ReactionDeckXL5d",
+            "ReadOnly": true,
+            "DeviceType": 2
+        },
+        {
+            "Name": "ReactionDeck5d",
+            "ReadOnly": true,
+            "DeviceType": 3
         }
-      ], 
-      "SupportedInMultiActions": false,
-	  "Tooltip": "This is an example tooltip", 
-      "UUID": "com.elgato.template.action"
-    }
-  ], 
-  "SDKVersion": 2,
-  "Author": "5Diraptor", 
-  "CodePath": "index.html", 
-  "PropertyInspectorPath": "propertyinspector/index.html", 
-  "Description": "Folder and file explorer for streamdeck", 
-  "Name": "DexPlorer", 
-  "Icon": "action/images/action", 
-  "URL": "https://www.elgato.com/en/gaming/stream-deck", 
-  "Version": "1.1.1",
-  "OS": [
-    {
-        "Platform": "windows", 
-        "MinimumVersion" : "10"
-    }
-  ],
-  "Software": 
-    {
-        "MinimumVersion" : "4.1"
-  }
-  "ApplicationsToMonitor": {
-    "mac": [
-      "com.apple.finder"
     ],
-    "windows": [
-      "explorer.exe"
-    ]
-  }
+	
+	"SDKVersion": 2,
+	"Author": "5Diraptor", 
+	"CodePath": "index.html", 
+	"PropertyInspectorPath": "propertyinspector/index.html", 
+	"Description": "Folder and file explorer for streamdeck", 
+	"Name": "DexPlorer", 
+	"Icon": "action/images/action", 
+	"URL": "https://www.elgato.com/en/gaming/stream-deck", 
+	"Version": "1.1.1",
+	"TimerInterval": 100,
+	"OS": [
+		{
+			"Platform": "windows", 
+			"MinimumVersion" : "10"
+		}
+	],
+	"Software": {
+			"MinimumVersion" : "4.1"
+	},
+	"ApplicationsToMonitor": {
+		"mac": [
+			"com.apple.finder"
+		],
+		"windows": [
+			"explorer.exe"
+		]
+	}
 }
