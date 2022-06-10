@@ -11,6 +11,15 @@
  * and other information about the current environmet in a JSON object
  * You can use it to subscribe to events you want to use in your plugin.
  */
+ 
+ 
+/* DEBUG */
+
+const app_debug = true;
+const dbg = app_debug ? console.log.bind(window.console, "[app.js]") : () => { };
+
+/* END DEBUG */
+
 
 $SD.on('connected', (jsonObj) => connected(jsonObj));
 
@@ -25,59 +34,24 @@ function connected(jsn) {
 	
 	for  (let i=0; i<tiles.length; i++) {
 	
-		$SD.on('com.5d.dexplorer.'+tiles[i]+'.willAppear', (jsonObj) => action.onWillAppear(jsonObj));
-		$SD.on('com.5d.dexplorer.'+tiles[i]+'.willAppear', (jsonObj) => action.onWillDisappear(jsonObj));
+		$SD.on('com.5d.dexplorer.'+tiles[i]+'.willAppear', (jsonObj) => action.onWillAppear(jsonObj, tiles[i]));
+		$SD.on('com.5d.dexplorer.'+tiles[i]+'.WillDisappear', (jsonObj) => action.onWillDisappear(jsonObj));
 		
-		$SD.on('com.5d.dexplorer.'+tiles[i]+'.keyUp', (jsonObj) => action.onKeyUp(jsonObj));
-		$SD.on('com.5d.dexplorer.'+tiles[i]+'.keyDown', (jsonObj) => action.onKeyDown(jsonObj));
+		$SD.on('com.5d.dexplorer.'+tiles[i]+'.keyUp', (jsonObj) => action.onKeyUp(jsonObj,tiles[i]));
+		$SD.on('com.5d.dexplorer.'+tiles[i]+'.keyDown', (jsonObj) => action.onKeyDown(jsonObj, tiles[i]));
 		$SD.on('com.5d.dexplorer.'+tiles[i]+'.sendToPlugin', (jsonObj) => action.onSendToPlugin(jsonObj));
 		$SD.on('com.5d.dexplorer.'+tiles[i]+'.didReceiveSettings', (jsonObj) => action.onDidReceiveSettings(jsonObj));
+	
+	
+	
+		// Activate the property inspector - view here: http://localhost:23654
+		$SD.on('com.5d.dexplorer.'+tiles[i]+'.propertyInspectorDidAppear', (jsonObj) => {
+			console.log('%c%s', 'color: white; background: black; font-size: 13px;', '[app.js]propertyInspectorDidAppear:');
+		});
+		$SD.on('com.5d.dexplorer.'+tiles[i]+'.propertyInspectorDidDisappear', (jsonObj) => {
+			console.log('%c%s', 'color: white; background: red; font-size: 13px;', '[app.js]propertyInspectorDidDisappear:');
+		});
 	};
-	
-	/*
-	
-	// HOME ACTION
-	// hinge everything on the home action.  The presence of this is required.
-	$SD.on('com.5d.dexplorer.home.willAppear', (jsonObj) => action.onWillAppear(jsonObj));
-	$SD.on('com.5d.dexplorer.home.willAppear', (jsonObj) => action.onWillDisappear(jsonObj));
-	
-	$SD.on('com.5d.dexplorer.home.keyUp', (jsonObj) => action.onKeyUp(jsonObj));
-	$SD.on('com.5d.dexplorer.home.keyDown', (jsonObj) => action.onKeyDown(jsonObj));
-	$SD.on('com.5d.dexplorer.home.sendToPlugin', (jsonObj) => action.onSendToPlugin(jsonObj));
-	$SD.on('com.5d.dexplorer.home.didReceiveSettings', (jsonObj) => action.onDidReceiveSettings(jsonObj));
-	
-	// TILE ACTION
-	// this action applies to all other tiles on the profile and are dynamic to show contents
-	$SD.on('com.5d.dexplorer.tile.keyUp', (jsonObj) => action.onKeyUp(jsonObj));
-	$SD.on('com.5d.dexplorer.tile.keyDown', (jsonObj) => action.onKeyDown(jsonObj));
-	$SD.on('com.5d.dexplorer.tile.sendToPlugin', (jsonObj) => action.onSendToPlugin(jsonObj));
-	$SD.on('com.5d.dexplorer.tile.didReceiveSettings', (jsonObj) => action.onDidReceiveSettings(jsonObj));
-	
-	
-	// NEXT ACTION
-	// this moves the tiles to the next page
-	$SD.on('com.5d.dexplorer.next.keyUp', (jsonObj) => action.onKeyUp(jsonObj));
-	$SD.on('com.5d.dexplorer.next.keyDown', (jsonObj) => action.onKeyDown(jsonObj));
-	$SD.on('com.5d.dexplorer.next.sendToPlugin', (jsonObj) => action.onSendToPlugin(jsonObj));
-	$SD.on('com.5d.dexplorer.next.didReceiveSettings', (jsonObj) => action.onDidReceiveSettings(jsonObj));
-	
-	
-	// PREVIOUS ACTION
-	// this moves the tiles to the previous page
-	$SD.on('com.5d.dexplorer.prev.keyUp', (jsonObj) => action.onKeyUp(jsonObj));
-	$SD.on('com.5d.dexplorer.prev.keyDown', (jsonObj) => action.onKeyDown(jsonObj));
-	$SD.on('com.5d.dexplorer.prev.sendToPlugin', (jsonObj) => action.onSendToPlugin(jsonObj));
-	$SD.on('com.5d.dexplorer.prev.didReceiveSettings', (jsonObj) => action.onDidReceiveSettings(jsonObj));
-	*/
-	
-	// Activate the property inspector - view here: http://localhost:23654
-	$SD.on('com.5d.dexplorer.tile.propertyInspectorDidAppear', (jsonObj) => {
-		console.log('%c%s', 'color: white; background: black; font-size: 13px;', '[app.js]propertyInspectorDidAppear:');
-	});
-	$SD.on('com.5d.dexplorer.tile.propertyInspectorDidDisappear', (jsonObj) => {
-		console.log('%c%s', 'color: white; background: red; font-size: 13px;', '[app.js]propertyInspectorDidDisappear:');
-	});
-	
 	
 };
 
@@ -110,7 +84,7 @@ const action = {
 	 * which are embedded in the events payload.
 	 */
 
-	onWillAppear: function (jsn) {
+	onWillAppear: function (jsn, tile) {
 		console.log("You can cache your settings in 'onWillAppear'", jsn.payload.settings);
 		/**
 		 * The willAppear event carries your saved settings (if any). You can use these settings
@@ -122,10 +96,11 @@ const action = {
 		 * $SD.api.getSettings(jsn.context);
 		*/
 		this.settings = jsn.payload.settings;
+		let pos = jsn.payload.coordinates.column+'/'+jsn.payload.coordinates.row;
 
 		// Nothing in the settings pre-fill, just something for demonstration purposes
 		if (!this.settings || Object.keys(this.settings).length === 0) {
-			this.settings.mynameinput = 'really?';
+			this.settings.mynameinput = tile+': '+pos;
 		}
 		this.setTitle(jsn);
 	},
@@ -145,17 +120,17 @@ const action = {
 
 		// Nothing in the settings pre-fill, just something for demonstration purposes
 		if (!this.settings || Object.keys(this.settings).length === 0) {
-			this.settings.mynameinput = 'really?';
+			this.settings.mynameinput = 'gone now';
 		}
 		this.setTitle(jsn);
 	},
 
-	onKeyUp: function (jsn) {
-		this.doSomeThing(jsn, 'onKeyUp', 'green');
+	onKeyUp: function (jsn, action) {
+		this.doSomeThing(jsn, 'onKeyUp: '+action, 'green');
 	},
 	
-	 onKeyDown: function (jsn) {
-		this.doSomeThing(jsn, 'onKeyUp', 'green');
+	 onKeyDown: function (jsn, action) {
+		this.doSomeThing(jsn, 'onKeyDown: '+action, 'purple');
 	},
 
 	onSendToPlugin: function (jsn) {
@@ -211,7 +186,10 @@ const action = {
 	 */
 
 	doSomeThing: function(inJsonData, caller, tagColor) {
-		console.log('%c%s', `color: white; background: ${tagColor || 'grey'}; font-size: 15px;`, `[app.js]doSomeThing from: ${caller}`);
+		let pos = inJsonData.payload.coordinates.column+'/'+inJsonData.payload.coordinates.row;
+		console.log('%c%s', `color: white; background: ${tagColor || 'grey'}; font-size: 15px;`, `[app.js]doSomeThing from: ${caller} : ${pos} `);
+		
+		console.log('%c%s', `color: white; background: ${tagColor || 'grey'}; font-size: 15px;`, `[app.js]the context: ${inJsonData.context}  `);
 		// console.log(inJsonData);
 	}, 
 

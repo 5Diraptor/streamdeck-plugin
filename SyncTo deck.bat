@@ -34,4 +34,4 @@ timeout 1
 ROBOCOPY "%src%" "%trg%" /mir /e /XD _*
 
 msg "%username%" the target has been archived and the source has been synced to the target
-
+pause
