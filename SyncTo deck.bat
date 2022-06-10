@@ -33,5 +33,5 @@ timeout 1
 :: copy the source to the target
 ROBOCOPY "%src%" "%trg%" /mir /e /XD _*
 
-msg the the target has been archived and the source has been synced to the target
+msg "%username%" the target has been archived and the source has been synced to the target
 
