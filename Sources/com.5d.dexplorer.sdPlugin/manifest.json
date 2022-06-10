@@ -6,27 +6,27 @@
 				{
 					"Image": "action/images/action",
 					"TitleAlignment": "middle", 
-					"FontSize": "16"
+					"FontSize": "10"
 				}
 			], 
 			"SupportedInMultiActions": false,
-			//"VisibleInActionsList": false,
+			"VisibleInActionsList": true,
 			"Tooltip": "This is an example tooltip", 
-			"UUID": "com.elgato.dexplorer.tile"
+			"UUID": "com.5d.dexplorer.tile"
 		},
 		{
-			"Name": "DxP_up", 
+			"Name": "DxP_home", 
 			"States": [
 				{
 					"Image": "action/images/action",
 					"TitleAlignment": "middle", 
-					"FontSize": "16"
+					"FontSize": "10"
 				}
 			], 
 			"SupportedInMultiActions": false,
-			//"VisibleInActionsList": false,
+			"VisibleInActionsList": true,
 			"Tooltip": "This is an example tooltip", 
-			"UUID": "com.elgato.dexplorer.up"
+			"UUID": "com.5d.dexplorer.home"
 		},
 		{
 			"Name": "DxP_prev", 
@@ -34,13 +34,13 @@
 				{
 					"Image": "action/images/action",
 					"TitleAlignment": "middle", 
-					"FontSize": "16"
+					"FontSize": "10"
 				}
 			], 
 			"SupportedInMultiActions": false,
-			//"VisibleInActionsList": false,
+			"VisibleInActionsList": true,
 			"Tooltip": "This is an example tooltip", 
-			"UUID": "com.elgato.dexplorer.prev"
+			"UUID": "com.5d.dexplorer.prev"
 		},
 		{
 			"Name": "DxP_next", 
@@ -48,33 +48,33 @@
 				{
 					"Image": "action/images/action",
 					"TitleAlignment": "middle", 
-					"FontSize": "16"
+					"FontSize": "10"
 				}
 			], 
 			"SupportedInMultiActions": false,
-			//"VisibleInActionsList": false,
+			"VisibleInActionsList": true,
 			"Tooltip": "This is an example tooltip", 
-			"UUID": "com.elgato.dexplorer.next"
+			"UUID": "com.5d.dexplorer.next"
 		}
 	],
 	"Profiles": [
         {
-            "Name": "ReactionDeck5d",
+            "Name": "DexPlorer",
             "ReadOnly": true,
             "DeviceType": 0
         },
         {
-            "Name": "ReactionDeckMini5d",
+            "Name": "DexPlorer Mini",
             "ReadOnly": true,
             "DeviceType": 1
         },
         {
-            "Name": "ReactionDeckXL5d",
+            "Name": "DexPlorer XL",
             "ReadOnly": true,
             "DeviceType": 2
         },
         {
-            "Name": "ReactionDeck5d",
+            "Name": "DexPlorer",
             "ReadOnly": true,
             "DeviceType": 3
         }
@@ -89,7 +89,7 @@
 	"Icon": "action/images/action", 
 	"URL": "https://www.elgato.com/en/gaming/stream-deck", 
 	"Version": "1.1.1",
-	"TimerInterval": 100,
+	"TimerInterval.oldv": 100,
 	"OS": [
 		{
 			"Platform": "windows", 
